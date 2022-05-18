@@ -48,7 +48,7 @@ public class CartManager {
         cart.printTotal();
 
         cart.add(stage2());
-        cart.add(stage2());
+        cart.add(stage2()); // For some reason this is changing at this point the item at index 0
         cart.printTotal();
 
     }

@@ -60,7 +60,7 @@ public class ShoppingCart {
         // Check if index 0 is null
         if (count == 0) {
             inCartTickets[0] = ticket;
-            count += 1;
+            iterateCount();
             return true;
         }
 
@@ -83,7 +83,7 @@ public class ShoppingCart {
 
         // If all conditions are met set variable and return true
         inCartTickets[count] = ticket;
-        count += 1;
+        iterateCount();
         return true;
 
     }
@@ -124,17 +124,17 @@ public class ShoppingCart {
             return;
         }
 
-       // DEBUG
-        System.out.println(inCartTickets[0].getName() + " X " + inCartTickets[0].getQuantity() + " $" + inCartTickets[0].getPrice() + " $" + inCartTickets[0].getTotalPrice());
-        System.out.println(inCartTickets[1].getName() + " X " + inCartTickets[1].getQuantity() + " $" + inCartTickets[1].getPrice() + " $" + inCartTickets[1].getTotalPrice());
-       //
-
         // Run through all possible record and print if the name is not null
         for (int i = 0; i <= count - 1; i++) {
 
             if (inCartTickets[i].getName() != "") {
-                System.out.println(inCartTickets[i].getName() + " X " + inCartTickets[i].getQuantity() + " $" + inCartTickets[i].getPrice() + " $" + inCartTickets[i].getTotalPrice());
+                System.out.println(inCartTickets[i].toString());
             }
         }
+    }
+
+    // Iterating count outside the method, so it will stick when it gets called next
+    private void iterateCount() {
+        count += 1;
     }
 }
