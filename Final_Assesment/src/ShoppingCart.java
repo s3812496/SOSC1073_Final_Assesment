@@ -15,4 +15,37 @@ public class ShoppingCart {
         inCartTickets = new Ticket[CAPACITY];
         count = 0;
     }
+
+    // Constructor that defines name and date
+    public ShoppingCart(String name, String date) {
+        customerName = name;
+        this.date = date;
+        inCartTickets = new Ticket[CAPACITY];
+        count = 0;
+    }
+
+
+    // Customer name Getter
+    public String getCustomerName(){return customerName;}
+
+    // Date Getter
+    public String getDate(){return date;}
+
+
+    // Customer name setter
+    public void setCustomerName(String name) {
+        customerName = name;
+    }
+
+    // Date Setter
+    public void setDate(String date){
+        this.date = date;
+    }
+
+    public boolean add(Ticket ticket) {
+
+
+
+        return false;
+    }
 }
