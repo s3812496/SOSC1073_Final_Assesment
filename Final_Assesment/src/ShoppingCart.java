@@ -48,42 +48,42 @@ public class ShoppingCart {
     // This method validates the entry of a ticket in to the cart then returns true or false
     public boolean add(Ticket ticket) {
         // Check if ticket passed is null be looking for default name
-        if (ticket.getName() == "UNKNOWN") {
+        if (ticket.getName() == "") {
             System.out.println("Ticket invalid or already added.");
             return false;
         } else {
 
+            // Check if index 0 is null
+            if (inCartTickets[0] == null) {
+                inCartTickets[0] = ticket;
+                count += 1;
+                return true;
+            }
+
             // Run through array and check if ticket already exists
-            for (int i = 0; i <= inCartTickets.length; i++) {
+            for (int i = 0; i <= count - 1; i++) {
 
                 // Compare name in the input compared to array
                 if (ticket.getName().toLowerCase() == inCartTickets[i].getName().toLowerCase()) {
                     System.out.println("Ticket invalid or already added.");
                     return false;
-                } else {
-
-                    // Finding if array is full and if it is returning false
-                    if (inCartTickets[inCartTickets.length].getName() != null) {
-                        System.out.println("SHOPPING CART IS FULL");
-                        return false;
-                    } else {
-
-                        // Find the first null entry and place the record in it
-                        for (i = 0; i <= inCartTickets.length; i++) {
-
-                            // Using IF statement to find the first empty
-                            if (inCartTickets[i].getName() == null) {
-                                inCartTickets[i] = ticket;
-                                return true;
-                            }
-                        }
-                    }
                 }
+
+            }
+
+            // Finding if array is full and if it is returning false
+            if (count - 1 == CAPACITY) {
+                System.out.println("SHOPPING CART IS FULL");
+                return false;
+            } else {
+
+                inCartTickets[count] = ticket;
+                count += 1; //
+                return true;
             }
 
 
         }
-        return false;
         }
 
         // This method runs through all the shopping cart entries and adds up the quantity
@@ -91,7 +91,7 @@ public class ShoppingCart {
             int TotalCount = 0;
 
             // Run through a for loop and add the quantity up for all the tickets in the cart
-            for (int i = 0; i <= inCartTickets.length; i++) {
+            for (int i = 0; i <= count - 1; i++) {
                 TotalCount = TotalCount + inCartTickets[i].getQuantity();
             }
 
@@ -103,7 +103,7 @@ public class ShoppingCart {
         int totalCost = 0;
 
         // for every entry call up the get price method and add it to the total
-        for (int i = 0; i <= inCartTickets.length; i++){
+        for (int i = 0; i <= count - 1; i++){
             totalCost = totalCost + inCartTickets[i].getPrice();
         }
 
@@ -112,6 +112,27 @@ public class ShoppingCart {
 
     // This method prints the information of the shopping cart and prints "Shopping cart is empty" if no records exist
     public void printTotal(){
-        
+        boolean recordExists = false;
+
+        System.out.println(customerName + " - " + date);
+
+        // Check if the shopping cart is empty and if it is print "Shopping cart is empty
+        if (count == 0) {
+            System.out.println("SHOPPING CART IS EMPTY");
+            return;
+        }
+
+       // DEBUG
+        System.out.println(inCartTickets[0].getName() + " X " + inCartTickets[0].getQuantity() + " $" + inCartTickets[0].getPrice() + " $" + inCartTickets[0].getTotalPrice());
+        System.out.println(inCartTickets[1].getName() + " X " + inCartTickets[1].getQuantity() + " $" + inCartTickets[1].getPrice() + " $" + inCartTickets[1].getTotalPrice());
+       //
+
+        // Run through all possible record and print if the name is not null
+        for (int i = 0; i <= count - 1; i++) {
+
+            if (inCartTickets[i].getName() != "") {
+                System.out.println(inCartTickets[i].getName() + " X " + inCartTickets[i].getQuantity() + " $" + inCartTickets[i].getPrice() + " $" + inCartTickets[i].getTotalPrice());
+            }
+        }
     }
 }
