@@ -28,10 +28,14 @@ public class ShoppingCart {
 
 
     // Customer name Getter
-    public String getCustomerName(){return customerName;}
+    public String getCustomerName() {
+        return customerName;
+    }
 
     // Date Getter
-    public String getDate(){return date;}
+    public String getDate() {
+        return date;
+    }
 
 
     // Customer name setter
@@ -40,7 +44,7 @@ public class ShoppingCart {
     }
 
     // Date Setter
-    public void setDate(String date){
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -51,50 +55,48 @@ public class ShoppingCart {
         if (ticket.getName() == "") {
             System.out.println("Ticket invalid or already added.");
             return false;
-        } else {
+        }
 
-            // Check if index 0 is null
-            if (inCartTickets[0] == null) {
-                inCartTickets[0] = ticket;
-                count += 1;
-                return true;
-            }
+        // Check if index 0 is null
+        if (count == 0) {
+            inCartTickets[0] = ticket;
+            count += 1;
+            return true;
+        }
 
-            // Run through array and check if ticket already exists
-            for (int i = 0; i <= count - 1; i++) {
+        // Run through array and check if ticket already exists
+        for (int i = 0; i <= count - 1; i++) {
 
-                // Compare name in the input compared to array
-                if (ticket.getName().toLowerCase() == inCartTickets[i].getName().toLowerCase()) {
-                    System.out.println("Ticket invalid or already added.");
-                    return false;
-                }
-
-            }
-
-            // Finding if array is full and if it is returning false
-            if (count - 1 == CAPACITY) {
-                System.out.println("SHOPPING CART IS FULL");
+            // Compare name in the input compared to array
+            if (ticket.getName().toLowerCase() == inCartTickets[i].getName().toLowerCase()) {
+                System.out.println("Ticket invalid or already added.");
                 return false;
-            } else {
-
-                inCartTickets[count] = ticket;
-                count += 1; //
-                return true;
             }
 
-
-        }
         }
 
-        // This method runs through all the shopping cart entries and adds up the quantity
-        public int getTotalCount() {
-            int TotalCount = 0;
+        // Finding if array is full and if it is returning false
+        if (count - 1 == CAPACITY) {
+            System.out.println("SHOPPING CART IS FULL");
+            return false;
+        }
 
-            // Run through a for loop and add the quantity up for all the tickets in the cart
-            for (int i = 0; i <= count - 1; i++) {
-                TotalCount = TotalCount + inCartTickets[i].getQuantity();
-            }
+        // If all conditions are met set variable and return true
+        inCartTickets[count] = ticket;
+        count += 1;
+        return true;
 
+    }
+
+
+    // This method runs through all the shopping cart entries and adds up the quantity
+    public int getTotalCount() {
+        int TotalCount = 0;
+
+        // Run through a for loop and add the quantity up for all the tickets in the cart
+        for (int i = 0; i <= count - 1; i++) {
+            TotalCount = TotalCount + inCartTickets[i].getQuantity();
+        }
         return TotalCount;
     }
 
