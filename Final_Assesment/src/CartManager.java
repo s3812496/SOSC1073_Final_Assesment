@@ -50,6 +50,47 @@ public class CartManager {
         cart.add(stage2());
         cart.printTotal();
 
+
+        // Stage 3
+
+        // Ask user if they want to remove a ticket and execute the method
+        System.out.println("Do you want to remove a ticket from the cart? Y/N");
+        scan = new Scanner(System.in);
+        String input;
+        String choice;
+
+        choice = scan.nextLine();
+        if (choice.toLowerCase().equals("y")) {
+            // Prompt of ticket name
+            System.out.println("Enter the name of the ticket:");
+            // Pass text on through to the method
+            input = scan.nextLine();
+            cart.removeTicket(input);
+            // Print the new total
+            cart.printTotal();
+        }
+
+        // Ask user if they want to update a ticket
+        System.out.println("Do you want to update a ticket from the cart? Y/N");
+        choice = scan.nextLine();
+
+        if (choice.toLowerCase().equals("y")) {
+            // Ask for the name of the ticket
+            System.out.println("Enter the name of the ticket:");
+            input = scan.nextLine();
+            cart.updateTicket(input);
+            // Print new total
+            cart.printTotal();
+        }
+
+        // Ask the user if they want to check out and if they do call the function
+        System.out.println("Do you want to checkout? Y/N");
+        choice = scan.nextLine();
+
+        if (choice.toLowerCase().equals("y")) {
+            cart.checkout();
+        }
+
     }
 
     private static Ticket stage2() {

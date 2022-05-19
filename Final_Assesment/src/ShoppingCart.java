@@ -64,7 +64,7 @@ public class ShoppingCart {
         for (int i = 0; i <= count - 1; i++) {
 
             // Compare name in the input compared to array
-            if (ticket.getName().toLowerCase() == inCartTickets[i].getName().toLowerCase()) {
+            if (ticket.getName().toLowerCase().equals(inCartTickets[i].getName().toLowerCase())) {
                 System.out.println("Ticket invalid or already added.");
                 return false;
             }
@@ -124,9 +124,13 @@ public class ShoppingCart {
         // Run through all possible record and print if the name is not null
         for (int i = 0; i <= count - 1; i++) {
 
-            if (inCartTickets[i].getName() != "") {
-                System.out.println(inCartTickets[i].toString());
-                totalcost += inCartTickets[i].getPrice();
+            try {
+                if (inCartTickets[i].getName() != null) {
+                    System.out.println(inCartTickets[i].toString());
+                    totalcost += inCartTickets[i].getPrice();
+                }
+            } catch (NullPointerException e) {
+
             }
         }
 
@@ -137,6 +141,67 @@ public class ShoppingCart {
     // Iterating count outside the method, so it will stick when it gets called next
     private void iterateCount() {
         count += 1;
+    }
+
+
+    // Method to remove a ticket
+    public void removeTicket(String ticketName) {
+
+        // Loop through array and check the name against the input if true remove the name and return, if false display that it was not found
+        for (int i = 0; i <= count - 1; i++) {
+            if (inCartTickets[i].getName().toLowerCase().equals(ticketName.toLowerCase())) {
+                // remove record
+                inCartTickets[i] = null;
+                System.out.println("Ticket " + ticketName + " removed from the cart.");
+                // When removed exit loop
+                return;
+            }
+        }
+        // Not found
+        System.out.println("Ticket not found. Cart remains unchanged.");
+    }
+
+    // Method to update the quantity on a pre-existing ticket
+    public void updateTicket(String ticketName) {
+        Scanner scan = new Scanner(System.in);
+
+        // Loop through and check the name against the input if true prompt the user for the new quantity if not display it was not found
+        for (int i = 0; i <= count - 1; i++) {
+            try {
+                if (inCartTickets[i].getName().toLowerCase().equals(ticketName.toLowerCase())) {
+                    // Prompt for new quantity
+                    System.out.println("Please enter the new quantity:");
+                    // Update the quantity
+                    inCartTickets[i].setQuantity(scan.nextInt());
+                    return;
+                }
+            } catch (NullPointerException e) {}
+        }
+
+        System.out.println("Ticket not found. Cart remains unchanged.");
+    }
+
+    // Method to checkout
+    public void checkout() {
+
+        // Print out total
+        this.printTotal();
+
+        if (count == 0) {
+            System.out.println("SHOPPING CART IS EMPTY");
+        }
+
+        // Setting all record to null
+        for (int i = 0; i <= count - 1; i++) {
+            inCartTickets[i] = null;
+        }
+
+        // Reset count index
+        count = 0;
+
+        // Print thank you message
+        System.out.println("Thank you for shopping");
+
     }
 
 }
