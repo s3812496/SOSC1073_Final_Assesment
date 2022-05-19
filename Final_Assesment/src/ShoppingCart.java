@@ -1,4 +1,3 @@
-import java.util.Locale;
 import java.util.Scanner;
 
 public class ShoppingCart {
@@ -127,7 +126,7 @@ public class ShoppingCart {
             try {
                 if (inCartTickets[i].getName() != null) {
                     System.out.println(inCartTickets[i].toString());
-                    totalcost += inCartTickets[i].getPrice();
+                    totalcost += inCartTickets[i].getTotalPrice();
                 }
             } catch (NullPointerException e) {
 
