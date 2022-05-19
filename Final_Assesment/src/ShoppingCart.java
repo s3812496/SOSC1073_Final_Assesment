@@ -1,4 +1,5 @@
 import java.util.Locale;
+import java.util.Scanner;
 
 public class ShoppingCart {
 
@@ -14,7 +15,7 @@ public class ShoppingCart {
     public ShoppingCart() {
         customerName = "UNKNOWN";
         date = "1 MAY 2022";
-        inCartTickets = new Ticket[CAPACITY];
+        inCartTickets  = new Ticket[CAPACITY];
         count = 0;
     }
 
@@ -24,6 +25,11 @@ public class ShoppingCart {
         this.date = date;
         inCartTickets = new Ticket[CAPACITY];
         count = 0;
+
+        // Loop to initialise all the records
+        for (int i = 0; i <= CAPACITY; i++) {
+            inCartTickets[0] = new Ticket();
+        }
     }
 
 
@@ -51,15 +57,12 @@ public class ShoppingCart {
 
     // This method validates the entry of a ticket in to the cart then returns true or false
     public boolean add(Ticket ticket) {
-        // Check if ticket passed is null be looking for default name
-        if (ticket.getName() == "") {
-            System.out.println("Ticket invalid or already added.");
-            return false;
-        }
 
         // Check if index 0 is null
         if (count == 0) {
-            inCartTickets[0] = ticket;
+            inCartTickets[0].setName(ticket.getName());
+            inCartTickets[0].setPrice(ticket.getPrice());
+            inCartTickets[0].setQuantity(ticket.getQuantity());
             iterateCount();
             return true;
         }
@@ -82,7 +85,9 @@ public class ShoppingCart {
         }
 
         // If all conditions are met set variable and return true
-        inCartTickets[count] = ticket;
+        inCartTickets[count].setName(ticket.getName());
+        inCartTickets[count].setPrice(ticket.getPrice());
+        inCartTickets[count].setQuantity(ticket.getQuantity());
         iterateCount();
         return true;
 
@@ -137,4 +142,5 @@ public class ShoppingCart {
     private void iterateCount() {
         count += 1;
     }
+
 }

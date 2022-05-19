@@ -26,8 +26,7 @@ public class CartManager {
 
 
         // Variables to use in stage 2
-        // Initialize shopping cart object
-        ShoppingCart cart = new ShoppingCart();
+
         String customerName;
         String date;
         scan = new Scanner(System.in);
@@ -41,33 +40,17 @@ public class CartManager {
         System.out.println("Enter the current date:");
         date = scan.nextLine();
 
-        // Set name and date
-        cart.setCustomerName(customerName);
-        cart.setDate(date);
+        // Set name and date and initialize object
+        ShoppingCart cart = new ShoppingCart(customerName, date);
 
         cart.printTotal();
 
-        cart.add(stage2());
-        cart.add(stage2()); // For some reason this is changing at this point the item at index 0
+
+
+        cart.add(new Ticket("test1", 2, 4));
+
+        cart.add(new Ticket("test2", 1, 2));
         cart.printTotal();
 
-    }
-
-    public static Ticket stage2() {
-        String name;
-        int price;
-        int quantity;
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println("Enter the name of the ticket:");
-        name = scan.nextLine();
-        System.out.println("Enter the ticket price:");
-        price = scan.nextInt();
-        System.out.println("Enter the quantity:");
-        quantity = scan.nextInt();
-
-        Ticket ticket = new Ticket(name, price, quantity);
-
-        return ticket;
     }
 }
