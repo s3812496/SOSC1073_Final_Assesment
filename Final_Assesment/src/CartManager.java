@@ -45,12 +45,26 @@ public class CartManager {
 
         cart.printTotal();
 
-
-
-        cart.add(new Ticket("test1", 2, 4));
-
-        cart.add(new Ticket("test2", 1, 2));
+        // Call up method for stage 2 to prompt user to enter data.
+        cart.add(stage2());
+        cart.add(stage2());
         cart.printTotal();
 
+    }
+
+    private static Ticket stage2() {
+        String name;
+        int price;
+        int quantity;
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Enter the name of the ticket:");
+        name = scan.nextLine();
+        System.out.println("Enter the ticket price:");
+        price = scan.nextInt();
+        System.out.println("Enter the quantity:");
+        quantity = scan.nextInt();
+
+        return new Ticket(name, price, quantity);
     }
 }

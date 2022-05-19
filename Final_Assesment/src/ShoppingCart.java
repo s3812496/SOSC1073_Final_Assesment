@@ -25,11 +25,6 @@ public class ShoppingCart {
         this.date = date;
         inCartTickets = new Ticket[CAPACITY];
         count = 0;
-
-        // Loop to initialise all the records
-        for (int i = 0; i <= CAPACITY; i++) {
-            inCartTickets[0] = new Ticket();
-        }
     }
 
 
@@ -60,9 +55,7 @@ public class ShoppingCart {
 
         // Check if index 0 is null
         if (count == 0) {
-            inCartTickets[0].setName(ticket.getName());
-            inCartTickets[0].setPrice(ticket.getPrice());
-            inCartTickets[0].setQuantity(ticket.getQuantity());
+            inCartTickets[0] = ticket;
             iterateCount();
             return true;
         }
@@ -85,9 +78,7 @@ public class ShoppingCart {
         }
 
         // If all conditions are met set variable and return true
-        inCartTickets[count].setName(ticket.getName());
-        inCartTickets[count].setPrice(ticket.getPrice());
-        inCartTickets[count].setQuantity(ticket.getQuantity());
+        inCartTickets[count] = ticket;
         iterateCount();
         return true;
 
@@ -119,7 +110,8 @@ public class ShoppingCart {
 
     // This method prints the information of the shopping cart and prints "Shopping cart is empty" if no records exist
     public void printTotal(){
-        boolean recordExists = false;
+
+        int totalcost = 0;
 
         System.out.println(customerName + " - " + date);
 
@@ -134,8 +126,12 @@ public class ShoppingCart {
 
             if (inCartTickets[i].getName() != "") {
                 System.out.println(inCartTickets[i].toString());
+                totalcost += inCartTickets[i].getPrice();
             }
         }
+
+        // Print the total cost off all the tickets.
+        System.out.println("Total cost: $" + totalcost);
     }
 
     // Iterating count outside the method, so it will stick when it gets called next

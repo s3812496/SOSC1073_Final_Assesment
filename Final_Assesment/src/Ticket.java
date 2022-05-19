@@ -1,7 +1,7 @@
 public class Ticket {
-    static protected String name;
-    static protected int price;
-    static protected int quantity;
+    protected String name;
+    protected int price;
+    protected int quantity;
 
     // Default constructor
     public Ticket() {
@@ -13,19 +13,19 @@ public class Ticket {
     public Ticket(String name, int price, int quantity) {
         // Checks to see if a name exists if not it does not set the name
         if (name != null) {
-            Ticket.name = name;
+            this.name = name;
         }
 
         // Checks to see if price is 0 or greater and sets it, otherwise it throws
         // an exception
         if (price >= 0) {
-            Ticket.price = price;
+            this.price = price;
         } else {
             throw new IllegalArgumentException(price + " is less than 0, price can not bee less than 0");
         }
 
         if (quantity >= 1) {
-            Ticket.quantity = quantity;
+            this.quantity = quantity;
         } else {
             throw new IllegalArgumentException(quantity + " is less than 1, quantity can not be less than 1");
         }
@@ -35,19 +35,19 @@ public class Ticket {
     // Checks name is valid and sets
     public void setName(String name) {
         if (name != null) {
-            Ticket.name = name;
+            this.name = name;
         }
     }
 
 
     // Returns name
-    public String getName(){return Ticket.name;}
+    public String getName(){return this.name;}
 
 
     // Checks price is valid and sets
     public void setPrice(int price){
         if (price >= 0) {
-            Ticket.price = price;
+            this.price = price;
         } else {
             throw new IllegalArgumentException(price + " is less than 0, price can not bee less than 0");
         }
@@ -55,13 +55,13 @@ public class Ticket {
 
 
     // Returns price
-    public int getPrice(){return Ticket.price;}
+    public int getPrice(){return this.price;}
 
 
     // Checks quantity is valid and sets
     public void setQuantity(int quantity) {
         if (quantity >= 1) {
-            Ticket.quantity = quantity;
+            this.quantity = quantity;
         } else {
             throw new IllegalArgumentException(quantity + " is less than 1, quantity can not be less than 1");
         }
@@ -69,16 +69,16 @@ public class Ticket {
 
 
     // Returns quantity
-    public int getQuantity(){return Ticket.quantity;}
+    public int getQuantity(){return this.quantity;}
 
 
     // Returns total price
-    public int getTotalPrice(){return (Ticket.price * Ticket.quantity);}
+    public int getTotalPrice(){return (this.price * this.quantity);}
 
 
     // Prints out the information of this object
     public String toString() {
-        return (Ticket.name + " " + Ticket.quantity + " X $" + Ticket.price + " = $" + getTotalPrice());
+        return (this.name + " " + this.quantity + " X $" + this.price + " = $" + getTotalPrice());
     }
 
 
